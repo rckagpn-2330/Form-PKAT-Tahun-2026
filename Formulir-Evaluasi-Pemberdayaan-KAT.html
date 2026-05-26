@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrumen Evaluasi PKAT Tahun 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .section-title {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    }
+    input:focus, select:focus, textarea:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    .table-row-hover:hover {
+        background-color: #f8fafc;
+    }
+    @media print {
+        .no-print { display: none !important; }
+        body { background: white; }
+        .shadow-lg, .shadow { box-shadow: none !important; }
+    }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="max-w-6xl mx-auto p-4 md:p-6">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
+            <div class="bg-gradient-to-r from-blue-900 to-blue-700 p-6 text-white">
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center p-2">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="48" fill="#1e40af"/>
+                            <path d="M50 15 L65 40 L50 35 L35 40 Z" fill="#FFD700"/>
+                            <circle cx="50" cy="55" r="20" fill="#10b981"/>
+                        </svg>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h1 class="text-xl md:text-2xl font-bold">KEMENTERIAN SOSIAL REPUBLIK INDONESIA</h1>
+                        <h2 class="text-lg md:text-xl font-semibold mt-1">DIREKTORAT JENDERAL PEMBERDAYAAN SOSIAL</h2>
+                        <p class="text-sm md:text-base mt-2 opacity-90">INSTRUMEN EVALUASI PROGRAM KOMUNITAS ADAT TERPENCIL (PKAT) TAHUN 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="pkatForm" class="space-y-6">
+            <!-- 1. Identitas Petugas -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h3 class="font-semibold text-lg">1. IDENTITAS PETUGAS</h3>
+                </div>
+                
+                <div id="petugasContainer">
+                    <div class="petugas-item border border-gray-200 rounded-lg p-4 mb-4 relative">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nama Petugas <span class="text-red-500">*</span></label>
+                                <input type="text" name="petugas_nama[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">NIP/NIK</label>
+                                <input type="text" name="petugas_nip[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Jabatan <span class="text-red-500">*</span></label>
+                                <input type="text" name="petugas_jabatan[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Instansi <span class="text-red-500">*</span></label>
+                                <input type="text" name="petugas_instansi[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="tambahPetugas()" class="no-print mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200 text-sm">
+                    <i class="fa-solid fa-plus mr-2"></i>Tambah Petugas
+                </button>
+            </div>
+
+            <!-- 2. Identitas Lokasi KAT -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3 class="font-semibold text-lg">2. IDENTITAS LOKASI KAT</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nama Komunitas Adat <span class="text-red-500">*</span></label>
+                        <input type="text" name="nama_kat" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Provinsi <span class="text-red-500">*</span></label>
+                        <input type="text" name="provinsi" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Kabupaten/Kota <span class="text-red-500">*</span></label>
+                        <input type="text" name="kabupaten" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Kecamatan <span class="text-red-500">*</span></label>
+                        <input type="text" name="kecamatan" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Desa/Kelurahan <span class="text-red-500">*</span></label>
+                        <input type="text" name="desa" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Dusun/Kampung</label>
+                        <input type="text" name="dusun" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Jumlah KK <span class="text-red-500">*</span></label>
+                        <input type="number" name="jumlah_kk" required min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Jumlah Jiwa <span class="text-red-500">*</span></label>
+                        <input type="number" name="jumlah_jiwa" required min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Tahun Pembinaan Awal <span class="text-red-500">*</span></label>
+                        <input type="number" name="tahun_bina" required min="1990" max="2026" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Titik Koordinat Lokasi</label>
+                        <input type="text" name="koordinat" placeholder="Contoh: -6.200000, 106.816666" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Profil Lokasi -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    <h3 class="font-semibold text-lg">3. PROFIL LOKASI: POTENSI DAN SUMBER LOKAL</h3>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Potensi Sumber Daya Alam <span class="text-red-500">*</span></label>
+                        <textarea name="potensi_sda" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan potensi SDA: pertanian, perkebunan, perikanan, hutan, tambang, dll"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Potensi Sumber Daya Manusia <span class="text-red-500">*</span></label>
+                        <textarea name="potensi_sdm" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan potensi SDM: tingkat pendidikan, keterampilan, kearifan lokal, dll"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Potensi Ekonomi Lokal <span class="text-red-500">*</span></label>
+                        <textarea name="potensi_ekonomi" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan potensi ekonomi: UMKM, kerajinan, hasil bumi, akses pasar, dll"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Aksesibilitas Lokasi <span class="text-red-500">*</span></label>
+                        <textarea name="aksesibilitas" rows="2" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan kondisi jalan, transportasi, jarak ke pusat layanan"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Bidang Pemberdayaan Sosial -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <h3 class="font-semibold text-lg">4. BIDANG PEMBERDAYAAN SOSIAL TERHADAP KAT</h3>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-3 py-3 text-left w-10">No</th>
+                                <th class="border border-gray-300 px-3 py-3 text-left">Aspek Pemberdayaan</th>
+                                <th class="border border-gray-300 px-3 py-3 text-center w-32">Kondisi<br><span class="text-xs font-normal">(B/C/K)</span></th>
+                                <th class="border border-gray-300 px-3 py-3 text-center w-32">Cakupan<br><span class="text-xs font-normal">(B/C/R)</span></th>
+                                <th class="border border-gray-300 px-3 py-3 text-center w-36">Keberlanjutan<br><span class="text-xs font-normal">(S/J/TP)</span></th>
+                                <th class="border border-gray-300 px-3 py-3 text-left">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-2 text-center">1</td>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Bantuan Sosial Permakanan</td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang1_bck" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Baik</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="K">K - Kurang</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang1_bcr" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Besar</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="R">R - Rendah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang1_sjtp" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="S">S - Sangat</option>
+                                        <option value="J">J - Jarang</option>
+                                        <option value="TP">TP - Tidak Pernah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <input type="text" name="bidang1_ket" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-2 text-center">2</td>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Bantuan Sosial Perumahan</td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang2_bck" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Baik</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="K">K - Kurang</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang2_bcr" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Besar</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="R">R - Rendah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang2_sjtp" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="S">S - Sangat</option>
+                                        <option value="J">J - Jarang</option>
+                                        <option value="TP">TP - Tidak Pernah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <input type="text" name="bidang2_ket" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-2 text-center">3</td>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Pemberdayaan Ekonomi/UEP</td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang3_bck" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Baik</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="K">K - Kurang</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang3_bcr" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Besar</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="R">R - Rendah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang3_sjtp" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="S">S - Sangat</option>
+                                        <option value="J">J - Jarang</option>
+                                        <option value="TP">TP - Tidak Pernah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <input type="text" name="bidang3_ket" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-2 text-center">4</td>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Jaminan Hidup (Jadup)</td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang4_bck" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Baik</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="K">K - Kurang</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang4_bcr" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Besar</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="R">R - Rendah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang4_sjtp" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="S">S - Sangat</option>
+                                        <option value="J">J - Jarang</option>
+                                        <option value="TP">TP - Tidak Pernah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <input type="text" name="bidang4_ket" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-2 text-center">5</td>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Pendampingan Sosial</td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang5_bck" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Baik</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="K">K - Kurang</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang5_bcr" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="B">B - Besar</option>
+                                        <option value="C">C - Cukup</option>
+                                        <option value="R">R - Rendah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <select name="bidang5_sjtp" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                        <option value="">Pilih</option>
+                                        <option value="S">S - Sangat</option>
+                                        <option value="J">J - Jarang</option>
+                                        <option value="TP">TP - Tidak Pernah</option>
+                                    </select>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2">
+                                    <input type="text" name="bidang5_ket" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3 text-xs text-gray-600">
+                    <p><strong>Keterangan:</strong> B=Baik, C=Cukup, K=Kurang | B=Besar, C=Cukup, R=Rendah | S=Sangat, J=Jarang, TP=Tidak Pernah</p>
+                </div>
+            </div>
+
+            <!-- 5. Tingkat Keberhasilan Pemberdayaan KAT -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3 class="font-semibold text-lg">5. TINGKAT KEBERHASILAN PEMBERDAYAAN KAT</h3>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-3 py-3 text-left w-12">No</th>
+                                <th class="border border-gray-300 px-3 py-3 text-left">Aspek Keberhasilan</th>
+                                <th class="border border-gray-300 px-3 py-3 text-center w-48">Skor<br><span class="text-xs font-normal">(1=Kurang, 2=Cukup, 3=Baik)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-3 text-center">1</td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <strong>Aspek Pemukiman:</strong> Ketersediaan rumah layak huni, infrastruktur dasar, sanitasi
+                                </td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <select name="skor_pemukiman" class="skor-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" onchange="hitungTotal()">
+                                        <option value="0">Pilih Skor</option>
+                                        <option value="1">1 - Kurang</option>
+                                        <option value="2">2 - Cukup</option>
+                                        <option value="3">3 - Baik</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-3 text-center">2</td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <strong>Aspek Sosial:</strong> Akses pendidikan, kesehatan, partisipasi sosial, kelembagaan
+                                </td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <select name="skor_sosial" class="skor-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" onchange="hitungTotal()">
+                                        <option value="0">Pilih Skor</option>
+                                        <option value="1">1 - Kurang</option>
+                                        <option value="2">2 - Cukup</option>
+                                        <option value="3">3 - Baik</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-3 text-center">3</td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <strong>Aspek Ekonomi:</strong> Pendapatan, usaha ekonomi produktif, ketahanan pangan
+                                </td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <select name="skor_ekonomi" class="skor-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" onchange="hitungTotal()">
+                                        <option value="0">Pilih Skor</option>
+                                        <option value="1">1 - Kurang</option>
+                                        <option value="2">2 - Cukup</option>
+                                        <option value="3">3 - Baik</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="border border-gray-300 px-3 py-3 text-center">4</td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <strong>Aspek Budaya/Spiritual:</strong> Pelestarian adat, kearifan lokal, toleransi
+                                </td>
+                                <td class="border border-gray-300 px-3 py-3">
+                                    <select name="skor_budaya" class="skor-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" onchange="hitungTotal()">
+                                        <option value="0">Pilih Skor</option>
+                                        <option value="1">1 - Kurang</option>
+                                        <option value="2">2 - Cukup</option>
+                                        <option value="3">3 - Baik</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="bg-blue-50 font-bold">
+                                <td class="border border-gray-300 px-3 py-3 text-center" colspan="2">TOTAL SKOR</td>
+                                <td class="border border-gray-300 px-3 py-3 text-center">
+                                    <input type="text" id="totalSkor" readonly value="0" class="w-full px-3 py-2 bg-white border-2 border-blue-500 rounded-lg text-center text-xl font-bold text-blue-700">
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-3 py-3 text-center" colspan="2">
+                                    <strong>KATEGORI KEBERHASILAN</strong>
+                                </td>
+                                <td class="border border-gray-300 px-3 py-3 text-center">
+                                    <div id="kategoriSkor" class="px-3 py-2 bg-white border border-gray-300 rounded-lg font-semibold">-</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3 text-xs text-gray-600">
+                    <p><strong>Rentang Kategori:</strong> 4-6 = Rendah, 7-9 = Sedang, 10-12 = Tinggi</p>
+                </div>
+            </div>
+
+            <!-- 6. Rencana Tindak Lanjut -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h3 class="font-semibold text-lg">6. RENCANA TINDAK LANJUT</h3>
+                </div>
+                
+                <div id="tindakLanjutContainer">
+                    <div class="tindaklanjut-item border border-gray-200 rounded-lg p-4 mb-4">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                            <div class="md:col-span-5">
+                                <label class="block text-sm font-medium mb-1">Uraian Kegiatan</label>
+                                <input type="text" name="rtl_kegiatan[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div class="md:col-span-3">
+                                <label class="block text-sm font-medium mb-1">Penanggung Jawab</label>
+                                <input type="text" name="rtl_pj[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-1">Waktu</label>
+                                <input type="text" name="rtl_waktu[]" placeholder="Q1 2026" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div class="md:col-span-2 flex items-end">
+                                <button type="button" onclick="hapusBaris(this, 'tindaklanjut')" class="no-print w-full px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition text-sm">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="tambahTindakLanjut()" class="no-print mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200 text-sm">
+                    <i class="fa-solid fa-plus mr-2"></i>Tambah Rencana
+                </button>
+            </div>
+
+            <!-- 7. Informasi Tambahan -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3 class="font-semibold text-lg">7. INFORMASI TAMBAHAN</h3>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Permasalahan/Kendala Lapangan</label>
+                        <textarea name="permasalahan" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan permasalahan yang dihadapi dalam pemberdayaan KAT"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Praktek Baik/Keberhasilan</label>
+                        <textarea name="praktek_baik" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Jelaskan praktek baik atau keberhasilan yang telah dicapai"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Rekomendasi</label>
+                        <textarea name="rekomendasi" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Berikan rekomendasi untuk peningkatan program PKAT"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Pengesahan -->
+            <div class="bg-white rounded-xl shadow p-5 md:p-6">
+                <div class="section-title text-white px-4 py-3 rounded-lg mb-5 flex items-center gap-2">
+                    <i class="fa-solid fa-stamp"></i>
+                    <h3 class="font-semibold text-lg">8. PENGESAHAN</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <p class="font-medium mb-20">Petugas Evaluasi,</p>
+                        <div class="border-t border-gray-400 pt-2">
+                            <input type="text" name="ttd_petugas" placeholder="Nama Lengkap" class="w-full text-center border-none focus:outline-none">
+                            <p class="text-xs text-gray-600 mt-1">NIP: _________________</p>
+                        </div>
+                    <div>
+                        <p class="font-medium mb-20">Mengetahui,<br>Kepala Dinas Sosial</p>
+                        <div class="border-t border-gray-400 pt-2">
+                            <input type="text" name="ttd_kadinsos" placeholder="Nama Lengkap" class="w-full text-center border-none focus:outline-none">
+                            <p class="text-xs text-gray-600 mt-1">NIP: _________________</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-medium mb-4">Tempat, Tanggal</p>
+                        <input type="text" name="tempat_tanggal" placeholder="Kota, DD MM YYYY" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mb-12">
+                        <div class="border-t border-gray-400 pt-2">
+                            <input type="text" name="ttd_kepala" placeholder="Nama Kepala KAT" class="w-full text-center border-none focus:outline-none">
+                            <p class="text-xs text-gray-600 mt-1">Ketua Adat/Kepala KAT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="no-print bg-white rounded-xl shadow p-5 md:p-6 flex flex-wrap gap-3 justify-end">
+                <button type="button" onclick="resetForm()" class="px-6 py-2.5 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition duration-200">
+                    <i class="fa-solid fa-rotate mr-2"></i>Reset Form
+                </button>
+                <button type="button" onclick="window.print()" class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg transition duration-200">
+                    <i class="fa-solid fa-print mr-2"></i>Cetak PDF
+                </button>
+                <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200">
+                    <i class="fa-solid fa-paper-plane mr-2"></i>Simpan Data
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center text-xs text-gray-500 mt-6 pb-6">
+            <p>© 2026 Direktorat Jenderal Pemberdayaan Sosial - Kementerian Sosial RI</p>
+        </div>
+    </div>
+
+<script>
+    let petugasCount = 1;
+
+    function tambahPetugas() {
+        petugasCount++;
+        const container = document.getElementById('petugasContainer');
+        const newPetugas = document.createElement('div');
+        newPetugas.className = 'petugas-item border border-gray-200 rounded-lg p-4 mb-4 relative';
+        newPetugas.innerHTML = `
+            <button type="button" onclick="hapusBaris(this, 'petugas')" class="no-print absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full text-xs">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nama Petugas <span class="text-red-500">*</span></label>
+                    <input type="text" name="petugas_nama[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">NIP/NIK</label>
+                    <input type="text" name="petugas_nip[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Jabatan <span class="text-red-500">*</span></label>
+                    <input type="text" name="petugas_jabatan[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Instansi <span class="text-red-500">*</span></label>
+                    <input type="text" name="petugas_instansi[]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+        `;
+        container.appendChild(newPetugas);
+    }
+
+    function tambahTindakLanjut() {
+        const container = document.getElementById('tindakLanjutContainer');
+        const newItem = document.createElement('div');
+        newItem.className = 'tindaklanjut-item border border-gray-200 rounded-lg p-4 mb-4';
+        newItem.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="md:col-span-5">
+                    <label class="block text-sm font-medium mb-1">Uraian Kegiatan</label>
+                    <input type="text" name="rtl_kegiatan[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block text-sm font-medium mb-1">Penanggung Jawab</label>
+                    <input type="text" name="rtl_pj[]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium mb-1">Waktu</label>
+                    <input type="text" name="rtl_waktu[]" placeholder="Q1 2026" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="md:col-span-2 flex items-end">
+                    <button type="button" onclick="hapusBaris(this, 'tindaklanjut')" class="no-print w-full px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition text-sm">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(newItem);
+    }
+
+    function hapusBaris(btn, type) {
+        const item = btn.closest(type === 'petugas' ? '.petugas-item' : '.tindaklanjut-item');
+        const container = type === 'petugas' ? document.getElementById('petugasContainer') : document.getElementById('tindakLanjutContainer');
+        
+        if (container.children.length > 1) {
+            item.remove();
+        } else {
+            alert('Minimal harus ada 1 baris data');
+        }
+    }
+
+    function hitungTotal() {
+        const skorInputs = document.querySelectorAll('.skor-input');
+        let total = 0;
+        skorInputs.forEach(input => {
+            total += parseInt(input.value) || 0;
+        });
+        
+        document.getElementById('totalSkor').value = total;
+        
+        let kategori = '-';
+        let bgColor = 'bg-white';
+        let textColor = 'text-gray-700';
+        
+        if (total >= 4 && total <= 6) {
+            kategori = 'RENDAH';
+            bgColor = 'bg-red-100';
+            textColor = 'text-red-700';
+        } else if (total >= 7 && total <= 9) {
+            kategori = 'SEDANG';
+            bgColor = 'bg-yellow-100';
+            textColor = 'text-yellow-700';
+        } else if (total >= 10 && total <= 12) {
+            kategori = 'TINGGI';
+            bgColor = 'bg-green-100';
+            textColor = 'text-green-700';
+        }
+        
+        const kategoriDiv = document.getElementById('kategoriSkor');
+        kategoriDiv.textContent = kategori;
+        kategoriDiv.className = `px-3 py-2 border-gray-300 rounded-lg font-semibold ${bgColor} ${textColor}`;
+    }
+
+    function resetForm() {
+        if (confirm('Apakah Anda yakin ingin mengosongkan semua data?')) {
+            document.getElementById('pkatForm').reset();
+            hitungTotal();
+        }
+    }
+
+    document.getElementById('pkatForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Data berhasil disimpan! \n\nFitur penyimpanan ke database dapat diintegrasikan dengan backend sesuai kebutuhan.');
+    });
+
+    // Set tahun default
+    document.addEventListener('DOMContentLoaded', function() {
+        const tahunInput = document.querySelector('input[name="tahun_bina"]');
+        tahunInput.max = new Date().getFullYear();
+    });
+</script>
+</body>
+</html>
